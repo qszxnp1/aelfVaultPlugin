@@ -1,0 +1,26 @@
+# Go specific
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Compiled Object files, Static and Dynamic libs (Shared Objects)
+*.o
+*.a
+*.obj
+
+# Debug files
+*.test
+*.prof
+
+# Dependency directories
+/vendor/
+/go.sum
+/Godeps/
+
+# Editor-specific swap files
+*~
+.*.swp
+*.swp
+
+.idea/
