@@ -1,5 +1,12 @@
 package model
 
+import (
+	"crypto/sha256"
+	"encoding/hex"
+
+	secp256 "github.com/haltingstate/secp256k1-go"
+)
+
 type AppAccount struct {
 	Address    string `json:"address"`
 	AppName    string `json:"app_name"`
@@ -34,4 +41,11 @@ func (a *AppAccount) UpdateData(data string) {
 
 func (a *AppAccount) UpdateAddress(address string) {
 	a.Address = address
+}
+
+func (a *AppAccount) Sign(data []byte) (string, error) {
+	privateKeyBytes, _ := hex.DecodeString(a.PrivateKey)
+	txDataBytes := sha256.Sum256(data)
+	signatureBytes := secp256.Sign(txDataBytes[:], privateKeyBytes)
+	return hex.EncodeToString(signatureBytes), nil
 }
