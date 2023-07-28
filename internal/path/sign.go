@@ -39,15 +39,19 @@ func (a *signPathConfig) getFields() map[string]*framework.FieldSchema {
 	}
 }
 
-func (a *signPathConfig) getCallbacks() map[logical.Operation]framework.OperationFunc {
+/*func (a *signPathConfig) getCallbacks() map[logical.Operation]framework.OperationFunc {
 	return map[logical.Operation]framework.OperationFunc{
-		logical.ReadOperation: a.sign,
+		logical.CreateOperation: a.sign,
+		logical.UpdateOperation: a.sign,
 	}
-}
+}*/
 
 func (a *signPathConfig) getOperations() map[logical.Operation]framework.OperationHandler {
 	return map[logical.Operation]framework.OperationHandler{
-		logical.ReadOperation: &framework.PathOperation{
+		logical.CreateOperation: &framework.PathOperation{
+			Callback: a.sign,
+		},
+		logical.UpdateOperation: &framework.PathOperation{
 			Callback: a.sign,
 		},
 	}
@@ -64,7 +68,7 @@ func (a *signPathConfig) sign(ctx context.Context, req *logical.Request, data *f
 		return nil, err
 	}
 
-	extData, err := dataWrapper.MustGetString("appId")
+	extData, err := dataWrapper.MustGetString("data")
 	if err != nil {
 		return nil, err
 	}

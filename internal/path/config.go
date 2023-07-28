@@ -10,6 +10,6 @@ type config interface {
 	getHelpSynopsis() string
 	getFields() map[string]*framework.FieldSchema
 	getExistenceFunc() framework.ExistenceFunc
-	getCallbacks() map[logical.Operation]framework.OperationFunc
+	//getCallbacks() map[logical.Operation]framework.OperationFunc
 	getOperations() map[logical.Operation]framework.OperationHandler
 }

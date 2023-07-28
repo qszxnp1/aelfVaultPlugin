@@ -39,6 +39,10 @@ func (a *appPathConfig) getFields() map[string]*framework.FieldSchema {
 			Type:        framework.TypeString,
 			Description: "The public key of app",
 		},
+		"address": {
+			Type:        framework.TypeString,
+			Description: "The address of app",
+		},
 		"data": {
 			Type:        framework.TypeString,
 			Description: "The data of app",
@@ -46,13 +50,14 @@ func (a *appPathConfig) getFields() map[string]*framework.FieldSchema {
 	}
 }
 
+/*
 func (a *appPathConfig) getCallbacks() map[logical.Operation]framework.OperationFunc {
 	return map[logical.Operation]framework.OperationFunc{
 		logical.CreateOperation: a.createAppAccount,
 		logical.UpdateOperation: a.updateAppAccount,
 		logical.ReadOperation:   a.readAppAccount,
 	}
-}
+}*/
 
 func (a *appPathConfig) getOperations() map[logical.Operation]framework.OperationHandler {
 	return map[logical.Operation]framework.OperationHandler{

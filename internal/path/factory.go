@@ -5,6 +5,7 @@ import "github.com/hashicorp/vault/sdk/framework"
 func GetPaths() []*framework.Path {
 	return []*framework.Path{
 		getPath(&appPathConfig{}),
+		getPath(&signPathConfig{}),
 	}
 }
 

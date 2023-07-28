@@ -1,10 +1,8 @@
 package model
 
 import (
-	"crypto/sha256"
 	"encoding/hex"
-
-	secp256 "github.com/haltingstate/secp256k1-go"
+	"github.com/ethereum/go-ethereum/crypto/secp256k1"
 )
 
 type AppAccount struct {
@@ -45,7 +43,7 @@ func (a *AppAccount) UpdateAddress(address string) {
 
 func (a *AppAccount) Sign(data []byte) (string, error) {
 	privateKeyBytes, _ := hex.DecodeString(a.PrivateKey)
-	txDataBytes := sha256.Sum256(data)
-	signatureBytes := secp256.Sign(txDataBytes[:], privateKeyBytes)
+	txDataBytes := data //sha256.Sum256(data)
+	signatureBytes, _ := secp256k1.Sign(txDataBytes[:], privateKeyBytes)
 	return hex.EncodeToString(signatureBytes), nil
 }

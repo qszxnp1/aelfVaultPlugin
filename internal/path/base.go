@@ -23,7 +23,7 @@ func (b basePathConfig) getExistenceFunc() framework.ExistenceFunc {
 }
 
 func (b basePathConfig) getAppAccountPath(appName string, appId string) string {
-	return fmt.Sprintf("apps/%s/%s/account", appName, appId)
+	return fmt.Sprintf("app/%s/%s/account", appName, appId)
 }
 
 func (b basePathConfig) getAppAccount(ctx context.Context, req *logical.Request, appName string, appId string) (*model.AppAccount, error) {
