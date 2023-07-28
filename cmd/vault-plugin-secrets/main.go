@@ -1,7 +1,7 @@
 package main
 
 import (
-	"log"
+	"github.com/hashicorp/go-hclog"
 	"os"
 
 	"github.com/hashicorp/vault/api"
@@ -13,9 +13,10 @@ import (
 func main() {
 	apiClientMeta := &api.PluginAPIClientMeta{}
 	flags := apiClientMeta.FlagSet()
+	logger := hclog.New(&hclog.LoggerOptions{})
 	err := flags.Parse(os.Args[1:]) // Ignore command, strictly parse flags
 	if err != nil {
-		log.Println(err)
+		logger.Error("parse args err,", err)
 		os.Exit(1)
 	}
 
@@ -27,7 +28,7 @@ func main() {
 		TLSProviderFunc:    tlsProviderFunc,
 	})
 	if err != nil {
-		log.Println(err)
+		logger.Error("plugin shutting down", "error", err)
 		os.Exit(1)
 	}
 }
